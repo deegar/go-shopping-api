@@ -1,0 +1,22 @@
+{
+  "name": "go_shopping_sys_api",
+  "host": "192.168.42.69",
+  "port": 8081,
+  "lang": "zh",
+  "tags": ["ryan", "sys_api"],
+  "user-srv": {
+    "name": "user-srv",
+    "host": "192.168.42.69",
+    "port": 50051
+  },
+  "jwt": {
+    "signing-key": "LWgCj4cNK38ku$v@ZDEHzMYvBXul9Y6E"
+  },
+  "consul": {
+    "host": "192.168.42.69",
+    "port": 8500
+  },
+  "sys-srv":{
+    "name": "go-shopping-sys-srv"
+  }
+}

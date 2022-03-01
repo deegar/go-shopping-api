@@ -1,0 +1,161 @@
+syntax="proto3";
+import "google/protobuf/empty.proto";
+option go_package=".;proto";
+
+service System {
+  rpc GetUserList(PageInfo) returns (UserListResponse);
+  rpc GetUserByMobile(MobileRequest) returns (UserInfoResponse);
+  rpc GetUserByLoginName(BaseRequest) returns (UserInfoResponse);
+  rpc GetUserById(IdRequest) returns (UserInfoResponse);
+  rpc CreateUser(CreateUserInfo) returns (UserInfoResponse);
+  rpc UpdateUser(UpdateUserInfo) returns (google.protobuf.Empty);
+  rpc CheckPassword(PasswordCheckInfo) returns (CheckResponse);
+
+  // role management method
+  rpc CreateRole(CreateRoleInfoRequest) returns (RoleInfoResponse);
+  rpc UpdateRole(UpdateRoleInfoRequest) returns (ResultResponse);
+  rpc DeleteRole(IdRequest) returns (ResultResponse);
+  rpc GetRoleList(PageInfo) returns (RoleInfoListResponse);
+
+  // menu management method
+  rpc CreateMenu(CreateMenuInfoRequest) returns (MenuInfoResponse);
+  rpc UpdateMenu(UpdateMenuInfoRequest) returns (ResultResponse);
+  rpc DeleteMenu(IdRequest) returns (ResultResponse);
+  rpc GetMenuList(PageInfo) returns (MenuInfoListResponse);
+}
+
+
+message PageInfo {
+  uint32 page_num = 1;
+  uint32 pageSize = 2;
+}
+
+// response the sql result
+message ResultResponse {
+  bool result = 1;
+  optional uint32 affect_rows = 2;
+}
+
+message IdRequest {
+  uint64 id = 1;
+}
+
+message MobileRequest {
+  string mobile = 1;
+}
+
+message BaseRequest {
+  string msg = 1;
+}
+
+message UpdateUserInfo {
+  uint64 id = 1;
+  string nick_name = 2;
+  string login_name = 3;
+  string password = 4;
+  string email = 5;
+  string mobile = 6;
+  string pic = 7;
+  int32  status = 8;
+  int64  last_login_at = 9;
+  string last_login_IP = 10;
+  int32 role_id = 11;
+}
+
+message UserInfoResponse {
+  uint64 id = 1;
+  string nick_name = 2;
+  string login_name = 3;
+  string password = 4;
+  string email = 5;
+  string mobile = 6;
+  string pic = 7;
+  int32  status = 8;
+  int64  last_login_at = 9;
+  string last_login_IP = 10;
+  int32 role_id = 11;
+}
+
+message CreateUserInfo {
+  optional string nick_name = 1;
+  string login_name = 2;
+  optional string mobile = 3;
+  optional string email = 4;
+  string password = 5;
+}
+
+message UserListResponse {
+  int64 total = 1;
+  repeated UserInfoResponse data = 2;
+}
+
+message CheckResponse {
+  bool success = 1;
+}
+
+message PasswordCheckInfo {
+  string password = 1;
+  string encrypted_password = 2;
+}
+
+//Role Manage
+message CreateRoleInfoRequest {
+  string role_name = 1;
+  string remark = 2;
+}
+
+message UpdateRoleInfoRequest {
+  uint32 id = 1;
+  string role_name = 2;
+  string remark = 3;
+}
+
+message RoleInfoResponse {
+  string role_name = 1;
+  string remark = 2;
+  optional bool success = 3;
+}
+
+message RoleInfoListResponse {
+  int64 total = 1;
+  repeated RoleInfoResponse data = 2;
+}
+
+//menu management
+message CreateMenuInfoRequest {
+  int32 parent_id = 1;
+  string name = 2;
+  string url = 3;
+  string permission = 4;
+  int32  type = 5;
+  string icon = 6;
+  int32 order_num = 7;
+}
+
+message UpdateMenuInfoRequest {
+  uint32 id = 1;
+  int32 parent_id = 2;
+  string name = 3;
+  string url = 4;
+  string permission = 5;
+  int32 type = 6;
+  int32 icon = 7;
+  int32 order_num = 8;
+}
+
+message MenuInfoResponse {
+  uint32 id = 1;
+  int32 parent_id = 2;
+  string name = 3;
+  string url = 4;
+  string permission = 5;
+  int32 type = 6;
+  string icon = 7;
+  int32 order_num = 8;
+  optional bool success = 9;
+}
+
+message MenuInfoListResponse {
+  int64 total = 1;
+  repeated MenuInfoResponse data = 2;
+}

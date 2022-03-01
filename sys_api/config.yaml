@@ -1,0 +1,12 @@
+group: "dev"
+name: "sys-srv"
+host: "127.0.0.1"
+port: 8848
+namespace: "a4bd1e70-47d7-46f1-a16c-23c9a04ee494"
+user: "nacos"
+password: "nacos"
+data_id: "config-sys-api.json"
+
+client:
+  log_dir: "tmp/nacos/log"
+  cache_dir: "tmp/nacos/cache"
